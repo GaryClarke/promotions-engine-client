@@ -16,9 +16,11 @@ class Product
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
+    #[ORM\Column(type: 'text')]
+    private $description;
+
     #[ORM\Column(type: 'integer', nullable: true)]
     private $product_id;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -46,5 +48,15 @@ class Product
         $this->product_id = $product_id;
 
         return $this;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description): void
+    {
+        $this->description = $description;
     }
 }
