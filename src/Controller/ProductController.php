@@ -40,6 +40,7 @@ class ProductController extends AbstractController
 
         $displayProduct = [
             'name' => $product->getName(),
+            'description' => $product->getDescription(),
             'quantity' => $promotionData['quantity'],
             'unit-price' => $promotionData['price'],
             'discounted-price' => $promotionData['discounted_price']
