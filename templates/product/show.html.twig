@@ -117,8 +117,8 @@
         </div>
 
         <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-            <h1 class="display-4 fw-normal">{{ product['name'] }}</h1>
-            <p class="fs-5 text-muted">{{ product['description'] }}</p>
+            <h1 class="display-4 fw-normal">{{ product.name }}</h1>
+            <p class="fs-5 text-muted">{{ product.description }}</p>
         </div>
     </header>
 
@@ -158,13 +158,15 @@
                     </div>
                 </div>
             </div>
+            {% if promotion %}
+
             <div class="col">
                 <div class="card mb-4 rounded-3 shadow-sm border-primary">
                     <div class="card-header py-3 text-white bg-primary border-primary">
                         <h4 class="my-0 fw-normal">Promotion</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title">€{{ product['discounted-price'] / 100 }}<small class="text-muted fw-light"></small></h1>
+                        <h1 class="card-title pricing-card-title">€{{ promotion['discounted_price'] / 100 }}<small class="text-muted fw-light"></small></h1>
                         <ul class="list-unstyled mt-3 mb-4">
                             <li>30 users included</li>
                             <li>15 GB of storage</li>
@@ -175,6 +177,8 @@
                     </div>
                 </div>
             </div>
+
+            {% endif %}
         </div>
 
         <h2 class="display-6 text-center mb-4">Compare plans</h2>

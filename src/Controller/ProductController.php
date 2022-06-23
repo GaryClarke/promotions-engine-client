@@ -26,7 +26,7 @@ class ProductController extends AbstractController
 
         $product = $this->productRepository->find($id);
 
-        $response = $this->client->request('POST', 'https://127.0.0.1:8001/products/1/lowest-price', [
+        $response = $this->client->request('POST', $this->promotionsEngineUrl . '/products/1/lowest-price', [
             'json' => [
                 'quantity' => $params['quantity'] ?? 1,
                 'request_location' => $params['requestLocation'] ?? '',
@@ -36,18 +36,19 @@ class ProductController extends AbstractController
             ],
         ]);
 
-        $promotionData = $response->toArray();
+        if($response->getStatusCode() === Response::HTTP_OK) {
 
-        $displayProduct = [
-            'name' => $product->getName(),
-            'description' => $product->getDescription(),
-            'quantity' => $promotionData['quantity'],
-            'unit-price' => $promotionData['price'],
-            'discounted-price' => $promotionData['discounted_price']
-        ];
+            $promotionData = $response->toArray();
+
+            return $this->render('product/show.html.twig', [
+                'product' => $product,
+                'promotion' => $promotionData
+            ]);
+        }
 
         return $this->render('product/show.html.twig', [
-            'product' => $displayProduct
+            'product' => $product,
+            'promotion' => null
         ]);
     }
 }
