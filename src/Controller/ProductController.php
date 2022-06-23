@@ -26,7 +26,9 @@ class ProductController extends AbstractController
 
         $product = $this->productRepository->find($id);
 
-        $response = $this->client->request('POST', $this->promotionsEngineUrl . '/products/1/lowest-price', [
+        $response = $this->client->request(
+            'POST',
+            $this->promotionsEngineUrl . '/products/' . $product->getProductId() . ' /lowest-price', [
             'json' => [
                 'quantity' => $params['quantity'] ?? 1,
                 'request_location' => $params['requestLocation'] ?? '',
